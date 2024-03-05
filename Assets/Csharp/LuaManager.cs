@@ -4,10 +4,7 @@
 // 描述:		    基于xlua的Lua管理器
 //------------------------------------------------------------
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using StarFramework;
 using XLua;
 using System.IO;
 

@@ -9,17 +9,13 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Events;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using XLua;
 
 namespace StarFramework.Runtime
 {
+    [LuaCallCSharp]
     public class LoadManager : SingletonAutoMono<LoadManager>
     {
-
-        public void LuaTest()
-        {
-            Debug.Log("Lua调用测试");
-        }
-
         public void LoadAsset<T>(string AAkey, UnityAction<T> action) where T : Object
         {
             StartCoroutine(IELoadAsset<T>(AAkey, action));

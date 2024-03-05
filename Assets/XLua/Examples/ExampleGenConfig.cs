@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using XLua;
+using System.Reflection;
 //using System.Reflection;
 //using System.Linq;
 
@@ -43,7 +44,6 @@ public static class ExampleGenConfig
                 typeof(ParticleSystem),
                 typeof(SkinnedMeshRenderer),
                 typeof(Renderer),
-                typeof(WWW),
                 typeof(Light),
                 typeof(Mathf),
                 typeof(System.Collections.Generic.List<int>),
@@ -59,6 +59,7 @@ public static class ExampleGenConfig
                 typeof(Action<string>),
                 typeof(Action<double>),
                 typeof(UnityEngine.Events.UnityAction),
+                typeof(UnityEngine.Events.UnityAction<GameObject>),
                 typeof(System.Collections.IEnumerator)
             };
 
@@ -96,4 +97,10 @@ public static class ExampleGenConfig
                 new List<string>(){"System.IO.DirectoryInfo", "Create", "System.Security.AccessControl.DirectorySecurity"},
                 new List<string>(){"UnityEngine.MonoBehaviour", "runInEditMode"},
             };
+
+    [BlackList]
+    public static Func<MemberInfo, bool> NoSpan = (memberInfo) =>
+    {
+        return !(memberInfo.DeclaringType.IsGenericType && memberInfo.DeclaringType.GetGenericTypeDefinition() == typeof(Span<>));
+    };
 }
