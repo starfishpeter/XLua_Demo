@@ -1,11 +1,10 @@
-print("执行基础配置的初始化过程")
+--执行基础配置的初始化过程
 
-print("引入面向对象相关")
+--引入面向对象相关
 
-print("系统类简写")
+--系统类简写
 
-
-print("Unity相关类简写")
+--Unity相关类简写
 GameObject = CS.UnityEngine.GameObject
 Transform = CS.UnityEngine.Transform
 RectTransform = CS.UnityEngine.RectTransform
@@ -17,6 +16,6 @@ UI = CS.UnityEngine.UI
 Image = UI.Image
 Button = UI.Button
 
-print("框架相关类引入")
+--框架相关类引入
 JsonManager = CS.StarFramework.Runtime.JsonDataControl
 LoadManager = CS.StarFramework.Runtime.LoadManager

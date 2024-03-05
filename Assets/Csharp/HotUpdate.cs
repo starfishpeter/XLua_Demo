@@ -4,11 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using StarFramework.Runtime;
+using UnityEngine.UI;
 
 public class HotUpdate : MonoBehaviour
 {
     //状态显示UI
     public TMP_Text statusText;
+
+    public Button startGame;
 
     //设定的超时
     public float Timeout = 5000f;
@@ -19,6 +22,12 @@ public class HotUpdate : MonoBehaviour
 
     void Start()
     {
+        //进入游戏场景 按钮逻辑
+        startGame.onClick.AddListener(()=>
+        {
+            SceneControl.Instance.LoadSceneAdditive("Main");
+        });
+
         //一开始先检测网络状态 如果不联网则不推进
         if(Application.internetReachability == NetworkReachability.NotReachable)
         {
@@ -80,13 +89,13 @@ public class HotUpdate : MonoBehaviour
                     Addressables.UpdateCatalogs(CheckHandle.Result, true).Completed +=(UpdateHandle)=>
                     {
                         Debug.Log("更新成功，加载主场景");
-                        SceneControl.Instance.LoadSceneAdditive("Main");
+                        startGame.gameObject.SetActive(true);
                     };
                 }
                 else
                 {
                     Debug.Log("未检测到要更新的资源，直接加载主场景");
-                    SceneControl.Instance.LoadSceneAdditive("Main");
+                    startGame.gameObject.SetActive(true);
                 }
             }
         };

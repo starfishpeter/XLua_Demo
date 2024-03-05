@@ -1,4 +1,4 @@
-print("从这里开始为Lua逻辑的入口")
+print("Lua逻辑开始执行")
 
 require("LuaBase")
 
@@ -6,8 +6,8 @@ require("LuaBase")
 --声明需要放在使用之前
 function LoadUIPrefab()
     LoadManager.Instance:LuaTest();
-    print("加载物体")
     end
 
 --从这里开始引入UI
+require("UIControl")
 require("MainPanel")

@@ -6,12 +6,12 @@
     },
     "excels": [
         {
-            "excel_name": "",
-            "script_directory": "Assets",
-            "asset_directory": "Assets",
-            "name_space": "",
+            "excel_name": "Excel/ShopTable.xlsx",
+            "script_directory": "Assets/Csharp",
+            "asset_directory": "Assets/Table",
+            "name_space": "GameTable",
             "use_hash_string": false,
-            "hide_asset_properties": true,
+            "hide_asset_properties": false,
             "use_public_items_getter": false,
             "compress_color_into_int": true,
             "treat_unknown_types_as_enum": false,
