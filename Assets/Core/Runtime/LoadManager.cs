@@ -38,5 +38,19 @@ namespace StarFramework.Runtime
                 }
             }
         }
+
+        //针对lua使用具体类型进行包裹，不使用泛型，我发现lua使用泛型问题很多，尽量避开吧
+        public GameObject LoadGameObject(string AAkey)
+        {
+            var handle = Addressables.LoadAssetAsync<GameObject>(AAkey);
+            handle.WaitForCompletion();
+
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                return Instantiate(handle.Result);
+            }
+
+            return null; 
+        }
     }
 }

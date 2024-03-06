@@ -1,4 +1,1 @@
 
-print(JsonManager.RuntimePath)
-
-LoadUIPrefab();

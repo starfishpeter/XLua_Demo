@@ -1,51 +1,58 @@
 --利用面向对象
 Object:subClass("BasePanel")
 
+--面板物体
 BasePanel.panelObj = nil
+
 --相当于模拟一个字典 键为 控件名 值为控件本身
 BasePanel.controls = {}
+
 --事件监听标识
 BasePanel.isInitEvent = false
 
 function BasePanel:Init(name)
     if self.panelObj == nil then
         --公共的实例化对象的方法
-        self.panelObj = ABMgr:LoadRes("ui", name, typeof(GameObject))
+
+        --加载进来 并且设置父级
+        --self.panelObj = ABMgr:LoadRes("ui", name, typeof(GameObject))
+        self.panelObj = LoadPrefab(name)
         self.panelObj.transform:SetParent(Canvas, false)
+
         --GetComponentsInChildren
-        --找到所有UI控件 存起来
-        print(self.panelObj)
+        --找到所有UI控件 存起来 但这里有个问题
+        --TextMeshPro的基类不是UIBehaviour
         local allControls = self.panelObj:GetComponentsInChildren(typeof(UIBehaviour))
-        --如果存入一些对于我们来说没用UI控件 
-        --为了避免 找各种无用控件 我们定一个规则 拼面板时 控件命名一定按规范来
-        --Button btn名字
-        --Toggle tog名字
-        --Image img名字
-        --ScrollRect sv名字
+        --这里先得到除了文字以外其它的控件 然后再拿文字组件
+        local allTMPText = self.panelObj:GetComponentsInChildren(typeof(TMPro.TMP_Text))
+        
         for i = 0, allControls.Length-1 do
-            local controlName = allControls[i].name
-            --按照名字的规则 去找控件 必须满足命名规则 才存起来
-            if string.find(controlName, "btn") ~= nil or 
-               string.find(controlName, "tog") ~= nil or 
-               string.find(controlName, "img") ~= nil or 
-               string.find(controlName, "sv") ~= nil or
-               string.find(controlName, "txt") ~= nil then
-                --为了让我们在得的时候 能够 确定得的控件类型 所以我们需要存储类型
-                --利用反射 Type 得到 控件的类名 
-                local typeName = allControls[i]:GetType().Name
-                --避免出现一个对象上 挂在多个UI控件 出现覆盖的问题 
-                --都会被存到一个容器中 相当于像列表数组的形式
-                --最终存储形式 
-                --{ btnRole = { Image = 控件, Button = 控件 },
-                --  togItem = { Toggle = 控件} }
-                if self.controls[controlName] ~= nil then
-                    --通过自定义索引的形式 去加一个新的 “成员变量”
-                    self.controls[controlName][typeName] = allControls[i]
-                else
-                    self.controls[controlName] = {[typeName] = allControls[i]}
+            --这里还可以细分 只添加自己需要的类型进来
+            local typeName = allControls[i]:GetType().Name
+            print(typeName)
+            if typeName == "Text" or
+                typeName == "Image" or
+                typeName == "ScrollView"then
+                    local controlName = allControls[i].name
+                    self:AddControl(controlName, allControls[i])
                 end
-            end
         end
+
+        for i = 0, allTMPText.Length - 1 do
+            local controlName = allTMPText[i].name
+            self:AddControl(controlName, allTMPText[i])
+        end
+    end
+end
+
+--用于添加组件的函数
+function BasePanel:AddControl(name, control)
+    --这里要加一个类型名来判断 否则同物体下不同组件会混淆
+    local typeName = control:GetType().Name
+    if self.controls[name] ~= nil then
+        self.controls[name][typeName] = control
+    else
+        self.controls[name] = {[typeName] = control}
     end
 end
 

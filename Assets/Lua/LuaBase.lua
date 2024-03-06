@@ -25,27 +25,16 @@ JsonManager = CS.StarFramework.Runtime.JsonDataControl
 LoadManager = CS.StarFramework.Runtime.LoadManager
 
 --公共变量
---Canvas = GameObject.Find("Canvas")
+Canvas = GameObject.Find("Canvas").transform
 
 --公共方法
-local LoadAssetMethod = xlua.get_generic_method(LoadManager, "LoadAsset")
-
---动态加载资源的泛型方法
-function LoadAsset(AAkey, action, objectType)
-    -- 创建泛型委托类型
-    local actionType = typeof(UnityAction).MakeGenericType(objectType)
-    -- 创建泛型委托实例
-    local typedAction = actionType(action)
-    -- 调用泛型方法
-    LoadAssetMethod:Invoke(LoadManager.Instance, {AAkey, typedAction})
-    end
 
 --加载预制体 默认为AA下Prefab文件夹
 function LoadPrefab(AAkey)
     local loadedObj = nil
-
-    LoadAsset("Prefab/"..AAkey, function(obj)
-        loadedObj = obj
-    end, typeof(GameObject))
+    loadedObj = LoadManager.Instance:LoadGameObject("Prefab/"..AAkey..".prefab")
+    if loadedObj == nil then
+        print("加载失败")
+        end
     return loadedObj
     end
