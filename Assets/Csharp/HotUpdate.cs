@@ -11,6 +11,8 @@ public class HotUpdate : MonoBehaviour
     //状态显示UI
     public TMP_Text statusText;
 
+    public GameObject RepeatUIEventSystem;
+
     public Button startGame;
 
     //设定的超时
@@ -25,6 +27,7 @@ public class HotUpdate : MonoBehaviour
         //进入游戏场景 按钮逻辑
         startGame.onClick.AddListener(()=>
         {
+            RepeatUIEventSystem.SetActive(false);
             SceneControl.Instance.LoadSceneAdditive("Main");
         });
 

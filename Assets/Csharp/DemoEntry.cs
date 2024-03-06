@@ -8,4 +8,9 @@ public class DemoEntry : MonoBehaviour
         LuaManager.Instance.Init();
         LuaManager.Instance.ExcuteLuaFile("LuaEntry");
     }
+
+    void Update()
+    {
+        //Debug.Log("运行中");
+    }
 }

@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 291921824}
   - component: {fileID: 291921823}
   - component: {fileID: 291921822}
+  - component: {fileID: 291921825}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -296,6 +297,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &291921825
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291921821}
+  m_Enabled: 1
 --- !u!1 &328741761
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +599,6 @@ GameObject:
   m_Component:
   - component: {fileID: 951238795}
   - component: {fileID: 951238794}
-  - component: {fileID: 951238793}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -598,14 +606,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &951238793
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 951238792}
-  m_Enabled: 1
 --- !u!20 &951238794
 Camera:
   m_ObjectHideFlags: 0
@@ -836,6 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusText: {fileID: 584151395}
+  RepeatUIEventSystem: {fileID: 291921821}
   startGame: {fileID: 2135741397}
   Timeout: 5000
 --- !u!4 &1409075145

@@ -52,6 +52,7 @@ namespace StarFramework.Runtime
 
 			if (File.Exists(path))
 			{
+				Debug.Log("加载位置 编辑器下路径");
 				return File.ReadAllBytes(path);
 			}
 			else
@@ -68,9 +69,10 @@ namespace StarFramework.Runtime
 			byte[] bytes = null;
 			string fileName = fileAAKey;
 
-			LoadManager.Instance.LoadAsset<TextAsset>(fileAAKey,(luaFile)=>{
+			LoadManager.Instance.LoadAsset<TextAsset>("LuaAssets/" + fileAAKey + ".txt",(luaFile)=>{
 				if(luaFile != null)
 				{
+					Debug.Log("加载位置 运行时路径");
 					bytes = luaFile.bytes;
 				}
 				else

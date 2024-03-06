@@ -10,20 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Scene
+  m_Name: Lua
   m_EditorClassIdentifier: 
-  m_GroupName: Scene
+  m_GroupName: Lua
   m_Data:
     m_SerializedData: []
-  m_GUID: 2a4badd66f671b04988ff115854c5a86
+  m_GUID: 6be8e339df0823c4b8f754164c24b27a
   m_SerializeEntries:
-  - m_GUID: 4294fd087e52a2b4ebe75fd8c9017dc3
-    m_Address: Preload
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9fc0d4010bbf28b4594072e72b8655ab
-    m_Address: Main
+  - m_GUID: 6c39589bcb2cb094eb05dd7f3dd18a10
+    m_Address: LuaAssets
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -31,5 +26,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: d21794b5819553a40a8fafa32a44adf7, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: dc157499424cbbe4583dda64b09f48bc, type: 2}
-    - {fileID: 11400000, guid: e6480fb48d0f3044484cb270ca9f417d, type: 2}
+    - {fileID: 11400000, guid: df06c0e534ea0114788101ec02ee860b, type: 2}
+    - {fileID: 11400000, guid: a7c9f0340794113408676bdc1c712938, type: 2}
