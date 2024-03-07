@@ -7,17 +7,14 @@ BasePanel.panelObj = nil
 --相当于模拟一个字典 键为 控件名 值为控件本身
 BasePanel.controls = {}
 
---事件监听标识
-BasePanel.isInitEvent = false
+--OnStart标识 用于确保事件只执行一次
+BasePanel.OnStartFinished = false
 
 function BasePanel:Init(name)
     if self.panelObj == nil then
-        --公共的实例化对象的方法
 
         --加载进来 并且设置父级
-        --self.panelObj = ABMgr:LoadRes("ui", name, typeof(GameObject))
-        self.panelObj = LoadPrefab(name)
-        self.panelObj.transform:SetParent(Canvas, false)
+        self.panelObj = PanelManager:GetPanel(name)
 
         --GetComponentsInChildren
         --找到所有UI控件 存起来 但这里有个问题
@@ -44,6 +41,8 @@ function BasePanel:Init(name)
             --print(controlName, "TMP")
             self:AddControl(controlName, allTMPText[i])
         end
+
+        --return self.panelObj
     end
 end
 
@@ -58,7 +57,7 @@ function BasePanel:AddControl(name, control)
     end
 end
 
---得到控件 根据 控件依附对象的名字 和 控件的类型字符串名字 Button Image Toggle
+--得到控件 根据 控件依附对象的名字 和 控件的类型名
 function BasePanel:GetControl(name, typeName)
     if self.controls[name] ~= nil then
         local sameNameControls = self.controls[name]
@@ -67,13 +66,4 @@ function BasePanel:GetControl(name, typeName)
         end
     end
     return nil
-end
-
-function BasePanel:ShowMe(name)
-    self:Init(name)
-    self.panelObj:SetActive(true)
-end
-
-function BasePanel:HideMe()
-    self.panelObj:SetActive(false)
 end

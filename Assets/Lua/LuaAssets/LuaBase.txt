@@ -22,6 +22,8 @@ UnityAction = CS.UnityEngine.Events.UnityAction
 UIBehaviour = CS.UnityEngine.EventSystems.UIBehaviour
 TMPro = CS.TMPro
 
+Debug = CS.UnityEngine.Debug
+
 --框架相关类引入
 JsonManager = CS.StarFramework.Runtime.JsonDataControl
 LoadManager = CS.StarFramework.Runtime.LoadManager

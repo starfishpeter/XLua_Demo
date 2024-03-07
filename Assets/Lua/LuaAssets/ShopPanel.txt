@@ -1,0 +1,1 @@
+BasePanel:subClass("ShopPanel")

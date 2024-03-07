@@ -16,24 +16,51 @@ namespace StarFramework.Editor
 		private static string luaFolderPath = "Assets/Lua";
 		private static string destinationFolder = "Assets/Lua/LuaAssets";
 
-			[MenuItem("Tools/Copy Lua Files")]
-			public static void CopyLuaFiles()
+		[MenuItem("Tools/Copy Lua Files")]
+		public static void CopyLuaFiles()
+		{
+			//主要是为了防止文件名更改导致冗余的情况发生
+			ClearDestinationFolder();
+
+			string[] luaFiles = Directory.GetFiles(luaFolderPath, "*.lua");
+			int fileCounts = 0;
+
+			foreach (string filePath in luaFiles)
 			{
-				string[] luaFiles = Directory.GetFiles(luaFolderPath, "*.lua");
-				int fileCounts = 0;
+				string fileName = Path.GetFileNameWithoutExtension(filePath);
+				string destinationPath = Path.Combine(destinationFolder, fileName + ".txt");
 
-				foreach (string filePath in luaFiles)
+				File.Copy(filePath, destinationPath, true);
+				fileCounts++;
+			}
+
+			AssetDatabase.Refresh();
+
+			EditorUtility.DisplayDialog("Lua File Copy", "成功拷贝了" + fileCounts + "份文件", "知道了");
+		}
+
+		//清空目标路径
+		private static void ClearDestinationFolder()
+		{
+			if (Directory.Exists(destinationFolder))
+			{
+				string[] files = Directory.GetFiles(destinationFolder);
+				string[] directories = Directory.GetDirectories(destinationFolder);
+
+				foreach (string file in files)
 				{
-					string fileName = Path.GetFileNameWithoutExtension(filePath);
-					string destinationPath = Path.Combine(destinationFolder, fileName + ".txt");
-
-					File.Copy(filePath, destinationPath, true);
-					fileCounts++;
+					File.Delete(file);
 				}
 
-				AssetDatabase.Refresh();
-
-				EditorUtility.DisplayDialog("Lua File Copy", "成功拷贝了" + fileCounts + "份文件", "知道了");
+				foreach (string directory in directories)
+				{
+					Directory.Delete(directory, true);
+				}
 			}
+			else
+			{
+				Directory.CreateDirectory(destinationFolder);
+			}
+		}
 	}
 }

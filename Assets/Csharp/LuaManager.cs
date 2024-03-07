@@ -37,8 +37,14 @@ namespace StarFramework.Runtime
 
 			//加载lua脚本 重定向
 			//一旦添加过后 解释器会自己从所有添加过的方法里找
+
+			//编辑器下直接从文件里找
+			#if UNITY_EDITOR
 			luaEnv.AddLoader(CustomLoader);
+			//非编辑器下要从AA路径加载
+			#else
 			luaEnv.AddLoader(CustomAALoader);
+			#endif
 		}
 
 		/// <summary>
@@ -52,7 +58,6 @@ namespace StarFramework.Runtime
 
 			if (File.Exists(path))
 			{
-				Debug.Log("加载位置 编辑器下路径");
 				return File.ReadAllBytes(path);
 			}
 			else
@@ -72,7 +77,6 @@ namespace StarFramework.Runtime
 			LoadManager.Instance.LoadAsset<TextAsset>("LuaAssets/" + fileAAKey + ".txt",(luaFile)=>{
 				if(luaFile != null)
 				{
-					Debug.Log("加载位置 运行时路径");
 					bytes = luaFile.bytes;
 				}
 				else
