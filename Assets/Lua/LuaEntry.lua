@@ -9,6 +9,7 @@ require("BasePanel")
 --从这里开始引入面板具体逻辑
 require("MainPanel")
 require("ShopPanel")
+require("InventoryPanel")
 
 --最后唤醒主面板
 PanelManager:ShowPanel("Main")

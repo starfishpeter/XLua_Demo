@@ -1,11 +1,23 @@
 BasePanel:subClass("Main")
 
-function Main:OnStart()
+--这里每个类都要重复调用一次类初始化 感觉有优化空间
+function Main:Init()
     self.base.Init(self, "Main")
+end
+Main:Init()
+
+function Main:OnStart()
     self:GetControl("ShopButton", "Button").onClick:AddListener
     (
         function()
             PanelManager:ShowPanel("Shop")
+        end
+    )
+
+    self:GetControl("InventoryButton", "Button").onClick:AddListener
+    (
+        function()
+            PanelManager:ShowPanel("Inventory")
         end
     )
     
@@ -13,4 +25,6 @@ function Main:OnStart()
     self:GetControl("TextUpdateTest","TextMeshProUGUI").text = "xLua热更Demo"
 end
 
-Main:OnStart()
+function Main:OnEnable()
+    Debug.Log("主界面面板被打开了");
+end

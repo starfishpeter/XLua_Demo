@@ -13,8 +13,11 @@ BasePanel.OnStartFinished = false
 function BasePanel:Init(name)
     if self.panelObj == nil then
 
-        --加载进来 并且设置父级
+        --从面板管理器直接拿到Obj
         self.panelObj = PanelManager:GetPanel(name)
+
+        --Init的时候要把lua实体传出来 方便调用
+        PanelManager.LuaEntity[name] = self
 
         --GetComponentsInChildren
         --找到所有UI控件 存起来 但这里有个问题
@@ -38,11 +41,8 @@ function BasePanel:Init(name)
 
         for i = 0, allTMPText.Length - 1 do
             local controlName = allTMPText[i].name
-            --print(controlName, "TMP")
             self:AddControl(controlName, allTMPText[i])
         end
-
-        --return self.panelObj
     end
 end
 
@@ -66,4 +66,14 @@ function BasePanel:GetControl(name, typeName)
         end
     end
     return nil
+end
+
+-- OnStart接口
+function BasePanel:OnStart()
+    --子类可以覆盖此方法来实现自定义的 OnStart 逻辑
+end
+
+-- OnEnable接口
+function BasePanel:OnEnable()
+    --子类可以覆盖此方法来实现自定义的 OnEnable 逻辑
 end
