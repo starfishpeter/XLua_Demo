@@ -52,5 +52,19 @@ namespace StarFramework.Runtime
 
             return null; 
         }
+
+        public Sprite LoadSprite(string AAkey)
+        {
+            var handle = Addressables.LoadAssetAsync<Sprite>(AAkey);
+            handle.WaitForCompletion();
+
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                return handle.Result;
+            }
+            
+            return null; 
+        }
+
     }
 }

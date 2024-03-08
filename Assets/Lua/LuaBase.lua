@@ -27,6 +27,10 @@ Debug = CS.UnityEngine.Debug
 --框架相关类引入
 JsonManager = CS.StarFramework.Runtime.JsonDataControl
 LoadManager = CS.StarFramework.Runtime.LoadManager
+GameObjectPoolManager = CS.StarFramework.Runtime.GameObjectPoolManager.Instance
+
+--表
+Table = CS.GlobalBlackboard.Instance.shopTable
 
 --公共变量
 Canvas = GameObject.Find("Canvas").transform
@@ -42,3 +46,13 @@ function LoadPrefab(AAkey)
         end
     return loadedObj
     end
+
+--加载图片资源
+function LoadSprite(AAkey)
+    local sprite = nil
+    sprite = LoadManager.Instance:LoadSprite("Icon/"..AAkey..".png")
+    if sprite == nil then 
+        print("加载失败")
+    end
+    return sprite
+end

@@ -10,6 +10,7 @@ BasePanel.controls = {}
 --OnStart标识 用于确保事件只执行一次
 BasePanel.OnStartFinished = false
 
+--默认面板用的Init函数
 function BasePanel:Init(name)
     if self.panelObj == nil then
 
@@ -19,30 +20,42 @@ function BasePanel:Init(name)
         --Init的时候要把lua实体传出来 方便调用
         PanelManager.LuaEntity[name] = self
 
-        --GetComponentsInChildren
-        --找到所有UI控件 存起来 但这里有个问题
-        --TextMeshPro的基类不是UIBehaviour
-        --这里先得到除了文字以外其它的控件 然后再拿文字组件
-        local allControls = self.panelObj:GetComponentsInChildren(typeof(UIBehaviour))
-        local allTMPText = self.panelObj:GetComponentsInChildren(typeof(TMPro.TMP_Text))
-        
-        for i = 0, allControls.Length-1 do
-            --这里还可以细分 只添加自己需要的类型进来
-            local typeName = allControls[i]:GetType().Name
-            if typeName == "Text" or
-                typeName == "Image" or
-                typeName == "Button" or
-                typeName == "ScrollView" then
-                    local controlName = allControls[i].name
-                    --print(controlName, typeName)
-                    self:AddControl(controlName, allControls[i])
-                end
-        end
+        self:CollectControls()
+    end
+end
 
-        for i = 0, allTMPText.Length - 1 do
-            local controlName = allTMPText[i].name
-            self:AddControl(controlName, allTMPText[i])
-        end
+--设计上的缺陷吧。。实际应该分开的
+function BasePanel:InitGrid(obj)
+    if obj ~= nil then
+        self.panelObj = obj
+        self:CollectControls()
+    end
+end
+
+function BasePanel:CollectControls()
+    --GetComponentsInChildren
+    --找到所有UI控件 存起来 但这里有个问题
+    --TextMeshPro的基类不是UIBehaviour
+    --这里先得到除了文字以外其它的控件 然后再拿文字组件
+    local allControls = self.panelObj:GetComponentsInChildren(typeof(UIBehaviour))
+    local allTMPText = self.panelObj:GetComponentsInChildren(typeof(TMPro.TMP_Text))
+    
+    for i = 0, allControls.Length-1 do
+        --这里还可以细分 只添加自己需要的类型进来
+        local typeName = allControls[i]:GetType().Name
+        if typeName == "Text" or
+            typeName == "Image" or
+            typeName == "Button" or
+            typeName == "ScrollView" then
+                local controlName = allControls[i].name
+                --print(controlName, typeName)
+                self:AddControl(controlName, allControls[i])
+            end
+    end
+
+    for i = 0, allTMPText.Length - 1 do
+        local controlName = allTMPText[i].name
+        self:AddControl(controlName, allTMPText[i])
     end
 end
 

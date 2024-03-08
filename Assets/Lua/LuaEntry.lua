@@ -6,7 +6,10 @@ require("LuaBase")
 require("PanelManager")
 require("BasePanel")
 
---从这里开始引入面板具体逻辑
+--格子逻辑
+require("ShopItemGrid")
+
+--面板具体逻辑
 require("MainPanel")
 require("ShopPanel")
 require("InventoryPanel")
