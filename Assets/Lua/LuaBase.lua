@@ -33,7 +33,8 @@ GameObjectPoolManager = CS.StarFramework.Runtime.GameObjectPoolManager.Instance
 Table = CS.GlobalBlackboard.Instance.shopTable
 
 --公共变量
-Canvas = GameObject.Find("Canvas").transform
+Canvas = CS.GlobalBlackboard.Instance.canvas
+--GameObject.Find("Canvas").transform
 
 --公共方法
 

@@ -8,6 +8,7 @@ require("BasePanel")
 
 --格子逻辑
 require("ShopItemGrid")
+require("InventoryItemGrid")
 
 --面板具体逻辑
 require("MainPanel")

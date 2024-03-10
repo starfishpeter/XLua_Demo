@@ -46,7 +46,7 @@ function BasePanel:CollectControls()
         if typeName == "Text" or
             typeName == "Image" or
             typeName == "Button" or
-            typeName == "ScrollView" then
+            typeName == "ScrollRect" then
                 local controlName = allControls[i].name
                 --print(controlName, typeName)
                 self:AddControl(controlName, allControls[i])

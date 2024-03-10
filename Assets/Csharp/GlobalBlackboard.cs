@@ -7,4 +7,6 @@ using GameTable;
 public class GlobalBlackboard : MonoSingleton<GlobalBlackboard>
 {
     public ShopTable shopTable;
+
+    public Transform canvas;
 }

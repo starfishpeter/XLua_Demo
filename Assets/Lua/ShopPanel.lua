@@ -48,12 +48,10 @@ function Shop:OnStart()
             self:InitShopItems(3)
         end
     )
-
-    self:InitShopItems(1)
 end
 
 function Shop:OnEnable()
-    Debug.Log("商店面板被打开了");
+    self:InitShopItems(1)
 end
 
 function Shop:InitShopItems(sheet)

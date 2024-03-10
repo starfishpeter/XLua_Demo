@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopTable: {fileID: 11400000, guid: 8b381deb3378d57488d4a7d6a91eaaaa, type: 2}
+  canvas: {fileID: 2068704931}
 --- !u!4 &104539900
 Transform:
   m_ObjectHideFlags: 0

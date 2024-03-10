@@ -26,5 +26,5 @@ function Main:OnStart()
 end
 
 function Main:OnEnable()
-    Debug.Log("主界面面板被打开了");
+    --Debug.Log("主界面面板被打开了");
 end
